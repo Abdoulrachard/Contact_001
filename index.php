@@ -1,45 +1,17 @@
 <?php
-class Contacts {
-    public $nom ;
-    public $prenom ;
-    public $email ;
-    public $telephone ;
-    
-    public function __construct($nom , $prenom ,$email ,$telephone){
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->email = $email;
-        $this->telephone = $telephone;
-    }
 
-
-
-    public function afficherInfoContact()
-    {
-        echo $this->nom . " " . $this->prenom . " " . $this->email . " " . $this->telephone ;
-    }
-
+$dsn = 'mysql:dbname=contacts;host:locahost' ;
+$user_name = 'root' ;
+$user_pwd = '' ;
+try{
+    $BD = new PDO($dsn ,$user_name ,$user_pwd) ;
+}catch(PDOException  $e){
+    echo "Connexion échouer" . " " . $e->getMessage() . "\n";
 
 }
+Autoloader::register();
+require "Autoloader.php";
 
-
-class Carnet {
-
-    public $listContacts = [] ;
-
-
-    public function ajouterContacts(Contacts $contact)
-    {
-        $this->listContacts[] = $contact ;
-    }
-    public function afficherContacts()
-    {
-
-        foreach($this->listContacts as $contacts){
-            $contacts -> afficherInfoContact();
-        }
-    }
-}
 $cnet= new Carnet();
 if(isset($_POST["nom"] , $_POST["prenom"] , $_POST["email"] , $_POST["telephone"])){
     $cont = new Contacts($_POST["nom"] , $_POST["prenom"] , $_POST["email"] , $_POST["telephone"]);
