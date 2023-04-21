@@ -9,8 +9,9 @@ try{
     echo "Connexion échouer" . " " . $e->getMessage() . "\n";
 
 }
+
+require "class/Autoloader.php";
 Autoloader::register();
-require "Autoloader.php";
 
 $cnet= new Carnet();
 if(isset($_POST["nom"] , $_POST["prenom"] , $_POST["email"] , $_POST["telephone"])){
